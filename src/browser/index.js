@@ -6,31 +6,6 @@ import { Provider,connect } from 'react-redux'
 
 
 
-// Action
-const myAction = { type: 'ACTION_INCREMENT'};
-
-// Reducer
-// reducerは、actionを受けてstateを変更するの為のメソッドです
-const myReducer = (currentState = 0, action) => {
-  switch(action.type) {
-    case 'ACTION_INCREMENT':
-      return currentState + 1;
-    default:
-      return currentState;
-  };
-};
-
-const store = createStore(myReducer);
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    ReactDOM.render(
-      <Provider store={store}>
-      <Timer name="Filange" seconds={180} />
-      </Provider>,
-      document.getElementById("root")
-    )
-})
 
 // Reactコンポーネントクラス「Timer」を宣言
 class Timer extends React.Component {
@@ -60,19 +35,65 @@ class Timer extends React.Component {
 
   // Timerコンポーネントが描画する要素を記述
   render() {
+    const { count, onIncrement, onDecrement } = this.props
     return (
       <div>
         <h1>Hello, {this.props.name}!</h1>
         <h2>{this.state.remaining} seconds remaining.</h2>
+        <button onClick={onIncrement}>プラス</button>
+        <button onClick={onDecrement}>マイナス</button>
+        カウント: {count} 回
       </div>
     );
   }
 }
 
-// このへんにロジックをぶちこんでいく
-function select(state) {
-  return {
+// Actions
+const INCREMENT_COUNTER = {
+  type: 'INCREMENT_COUNTER'
+};
+const DECREMENT_COUNTER = {
+  type: 'DECREMENT_COUNTER'
+};
+
+// Reducer
+function counterReducer(state = {count: 0}, action) {
+  switch (action.type) {
+    case 'INCREMENT_COUNTER':
+      return {count: state.count + 1};
+    case 'DECREMENT_COUNTER':
+      return {count: state.count - 1};
+    default:
+      return state
   }
 }
 
-export default connect(select)(Timer)
+// Store
+const store = createStore(counterReducer);
+
+function mapStateToProps(state) {
+  return {
+    count: state.count
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onIncrement: () => dispatch(INCREMENT_COUNTER),
+    onDecrement: () => dispatch(DECREMENT_COUNTER)
+  };
+}
+
+let TimerApp = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Timer)
+
+document.addEventListener("DOMContentLoaded", () => {
+    ReactDOM.render(
+      <Provider store={store}>
+      <TimerApp name="Filange" seconds={180} />
+      </Provider>,
+      document.getElementById("root")
+    )
+})
