@@ -8,7 +8,7 @@ module.exports = {
     open: true,
   },
   devtool: "source-map",
-  entry: "./src/browser/index.js",
+  entry: "./src/index.js",
   output: {
     path: path.join(__dirname, 'target'),
     filename: "bundle.js",
