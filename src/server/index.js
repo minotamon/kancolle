@@ -5,5 +5,5 @@ const path = require("path")
 app.use(morgan("combined"))
  
 app.get("/", function(req, res) {
-  res.sendFile(path.resolve("./target/index.html"))
+  res.sendFile(path.resolve("./public/index.html"))
 })

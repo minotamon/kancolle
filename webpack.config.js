@@ -2,7 +2,7 @@ const path = require("path")
 module.exports = {
   mode: 'development',
   devServer: {
-    contentBase: "./target",
+    contentBase: "./public",
     watchContentBase: true,
     port: 9000,
     open: true,
@@ -10,7 +10,7 @@ module.exports = {
   devtool: "source-map",
   entry: "./src/index.js",
   output: {
-    path: path.join(__dirname, 'target'),
+    path: path.join(__dirname, 'public'),
     filename: "bundle.js",
   },
   resolve: {},
