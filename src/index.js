@@ -16,9 +16,19 @@ const INCREMENT_COUNTER = {
 const DECREMENT_COUNTER = {
   type: 'DECREMENT_COUNTER'
 };
+const BUILD_DECK = {
+  type: 'BUILD_DECK'
+};
+
+const initialState = {
+  count: 0,
+  remaining: 0,
+  deck: ''
+}
 
 // Reducer
-function counterReducer(state = {count: 0}, action) {
+// 現在の状態を示すstateが入ってくる
+function counterReducer(state = initialState, action) {
   //const deck ={"version":4,"f1":{"s1":{"id":"22","lv":0,"luck":-1,"items":{}},"s2":{"id":"45","lv":0,"luck":-1,"items":{}}}}
   //const deck ={"version":4,"f1":{"s1":{"id":"22","lv":3,"luck":-1,"items":{"i1":{"id":2,"rf":"3"}}},"s2":{"id":"45","lv":0,"luck":-1,"items":{}}}}
   const deck ={"version":4,"f1":{"s1":{"id":"22","lv":3,"luck":-1,"items":{"i1":{"id":2,"rf":"3"},"i2":{"id":11,"rf":0}}},"s2":{"id":"45","lv":0,"luck":-1,"items":{}}}}
@@ -37,9 +47,9 @@ function counterReducer(state = {count: 0}, action) {
   }
   switch (action.type) {
     case 'INCREMENT_COUNTER':
-      return {count: state.count + 1};
+      return {count: state.count + 1,deck: ''};
     case 'DECREMENT_COUNTER':
-      return {count: state.count - 1};
+      return {count: state.count - 1,deck: ''};
     default:
       return state
   }
@@ -50,14 +60,17 @@ const store = createStore(counterReducer);
 
 function mapStateToProps(state) {
   return {
-    count: state.count
+    count: state.count,
+    remaining: state.remaining,
+    deck: state.deck
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     onIncrement: () => dispatch(INCREMENT_COUNTER),
-    onDecrement: () => dispatch(DECREMENT_COUNTER)
+    onDecrement: () => dispatch(DECREMENT_COUNTER),
+    onDeck: () => dispatch(BUILD_DECK)
   };
 }
 
