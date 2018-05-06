@@ -19,6 +19,9 @@ const DECREMENT_COUNTER = {
 const BUILD_DECK = {
   type: 'BUILD_DECK'
 };
+const COUNT_DOWN = {
+  type: 'COUNT_DOWN'
+};
 
 const initialState = {
   count: 0,
@@ -50,6 +53,8 @@ function counterReducer(state = initialState, action) {
       return {count: state.count + 1,deck: ''};
     case 'DECREMENT_COUNTER':
       return {count: state.count - 1,deck: ''};
+    case 'COUNT_DOWN':
+      return {count: state.count,remaining: state.remaining - 1,deck: ''};
     default:
       return state
   }
@@ -70,6 +75,7 @@ function mapDispatchToProps(dispatch) {
   return {
     onIncrement: () => dispatch(INCREMENT_COUNTER),
     onDecrement: () => dispatch(DECREMENT_COUNTER),
+    countDown: () => dispatch(COUNT_DOWN),
     onDeck: () => dispatch(BUILD_DECK)
   };
 }
