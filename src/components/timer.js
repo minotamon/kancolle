@@ -40,8 +40,6 @@ class Timer extends React.Component {
         <h2>{this.state.remaining} seconds remaining.</h2>
         <button onClick={onIncrement}>プラス</button>
         <button onClick={onDecrement}>マイナス</button>
-        <input placeholder="デッキを入れてください" value={deck}/ >
-        <button onClick={onDeck}>計算</button>
         カウント: {count} 回
       </div>
     );
