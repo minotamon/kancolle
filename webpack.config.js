@@ -1,11 +1,12 @@
 const path = require("path")
+// open: false do not open browser
 module.exports = {
   mode: 'development',
   devServer: {
     contentBase: "./public",
     watchContentBase: true,
     port: 9000,
-    open: true,
+    open: false,
   },
   devtool: "source-map",
   entry: "./src/index.js",

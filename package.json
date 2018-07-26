@@ -7,7 +7,8 @@
     "start": "npm-run-all -p start:* watch:build",
     "start:server": "node src/server/index.js",
     "watch:build": "webpack-dev-server",
-    "test": "jest"
+    "test": "jest",
+    "build": "webpack --mode production"
   },
   "keywords": [],
   "author": "",
