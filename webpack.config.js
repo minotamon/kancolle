@@ -1,5 +1,6 @@
 const path = require("path")
 // open: false do not open browser
+//    "webpack-dev-server/client?http://cospix.jp/",
 module.exports = {
   mode: 'development',
   devServer: {
@@ -9,7 +10,9 @@ module.exports = {
     open: false,
   },
   devtool: "source-map",
-  entry: "./src/index.js",
+  entry: [
+    "./src/index.js",
+  ],
   output: {
     path: path.join(__dirname, 'public'),
     filename: "bundle.js",
